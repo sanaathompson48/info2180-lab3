@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	//exercise 2
 	let currentPlayer= 'X';
-	const state= Array(9).fill('');
+	let state= Array(9).fill('');
 	let gameOver= false;
 
 	//exercise 4
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	function checkWinner() {
 		for (const [a, b, c] of wins) {
 			if (state[a] && state[a] == state[b] && state[b] == state[c]) {
-				return state[a]; //get a 'x' or 'o'
+				return state[a]; //get a 'X' or 'O'
 			}
 		}
 		return null;
@@ -50,6 +50,24 @@ document.addEventListener('DOMContentLoaded', () => {
 		//exercise 3
 		square.addEventListener('mouseover', () => square.classList.add('hover'));
 		square.addEventListener('mouseout', () => square.classList.remove('hover'));
+	});
+
+	//exercise 5
+	const newGameButton= document.querySelector('.btn');
+
+	newGameButton.addEventListener('click', () => {
+
+		state= Array(9).fill('');
+		gameOver= false;
+		currentPlayer= 'X';
+
+		squares.forEach(square => {
+			square.textContent= '';
+			square.classList.remove('X', 'O', 'hover');
+		});
+
+		statusDiv.textContent= 'Move your mouse over a square and click to play an X or an O.';
+		statusDiv.classList.remove('you-won');
 	});
 });
 
